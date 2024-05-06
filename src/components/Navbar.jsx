@@ -1,44 +1,177 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaCircleUser } from "react-icons/fa6";
+import { DownOutlined } from "@ant-design/icons";
+import { Dropdown, Space } from "antd";
+import Hamburger from "hamburger-react";
+
+const items = [
+  {
+    key: "1",
+    label: (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.antgroup.com"
+      >
+        Fundraisers
+      </a>
+    ),
+  },
+  {
+    key: "2",
+    label: (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.aliyun.com"
+      >
+        Gallery
+      </a>
+    ),
+    disabled: true,
+  },
+  {
+    key: "3",
+    label: (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.luohanacademy.com"
+      >
+        Be an Agent
+      </a>
+    ),
+    disabled: true,
+  },
+];
 
 const Navbar = () => {
+  const [isBurgerOpen, setBurgerOpen] = useState(false);
+  const [isProfileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (
+      profileRef.current &&
+      !profileRef.current.contains(event.target) &&
+      !event.target.classList.contains("profile-button")
+    ) {
+      setProfileOpen(false);
+    }
+  };
+
+  const handleProfileClick = () => {
+    setProfileOpen(!isProfileOpen);
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-   
+    <nav className="bg-white border-gray-200 w-full">
 
-<nav className="bg-white border-gray-200 w-full ">
-  <div className="w-full  flex flex-wrap items-center justify-between mx-auto p-4">
-    <Link 
-    to="/"
-    className="flex items-center space-x-3 rtl:space-x-reverse">
-  
-      {/* <img src="" className="h-8" alt="" /> */}
-      <span className="self-center text-2xl  whitespace-nowrap text-red-500 font-extrabold ">Keep Changes</span>
-  </Link>
+      <div className="flex items-center justify-between mx-auto p-4">
+        
 
-  <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button type="button" className="flex text-sm rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-        <span className="sr-only">Open user menu</span>
-        <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo"/>
-      </button>
-    
-  </div>
-  <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-    <ul className="flex flex-col md:flex-row font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg ">
-     
-    <Link className="text-black font-semibold mx-4  ">Program</Link>
-    <Link className="text-black font-semibold  mx-4 ">Gallery</Link>
-    <Link className="text-black font-semibold mx-4 ">About</Link>
+      <div className="flex items-center space-x-3 md:ml-8 mt-1 gap-3">
+          <Link to="/" className="text-2xl font-extrabold text-red-500 text-nowrap">
+            Keep Changes
+          </Link>
+          <button
+            type="button"
+            className="flex items-center justify-center w-10 h-10 text-indigo-500 profile-button md:hidden"
+            onClick={handleProfileClick}
+          >
+            <FaCircleUser size={35} />
+          </button>
+        </div>
+        <div className="hidden md:flex"> 
+          <ul className="flex flex-col md:flex-row font-medium p-4 md:p-0 mt-4 gap-10">
+            <Dropdown
+              menu={{
+                items,
+              }}
+              className="w-[100px] items-center"
+              overlayStyle={{ arrow: false }}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  Programs
+                  <DownOutlined />
+                </Space>
+              </a>
+            </Dropdown>
+            <Link className="text-black font-semibold mx-4">Gallery</Link>
+            <Link className="text-black font-semibold mx-4">About</Link>
+          </ul></div>
+
+        <div className="flex items-center md:hidden">
+          <Hamburger toggled={isBurgerOpen} toggle={setBurgerOpen} />
+        
+        </div>
+
+        <div
+          className={`${
+            isBurgerOpen ? "block" : "hidden"
+          } md:hidden w-full bg-white fixed top-[68px] left-0 right-0 z-20`}
+        >
+          <ul className="flex flex-col items-center font-medium p-4 md:p-0 mt-4 gap-10">
+            <Dropdown
+              menu={{
+                items,
+              }}
+              className="w-[100px] items-center"
+              overlayStyle={{ arrow: false }}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  Programs
+                  <DownOutlined />
+                </Space>
+              </a>
+            </Dropdown>
+            <Link className="text-black font-semibold">Gallery</Link>
+            <Link className="text-black font-semibold">About</Link>
+          </ul>
+        </div>
+ 
 
 
-    </ul>
-  </div>
-  
 
-  </div>
-  <FaCircleUser />
-</nav>
 
-  )
-}
+        <div ref={profileRef} className="hidden md:flex items-center space-x-3 md:space-x-0 gap-4">
+          <button className="p-2 font-semibold bg-[#EF5757] text-white rounded-lg hover:bg-[#d84f4f]">
+            Start a Fundraiser
+          </button>
+          <button
+            type="button"
+            className=" items-center justify-center w-10 h-10 text-indigo-500 hidden md:block"
+            onClick={handleProfileClick}
+          >
+            <FaCircleUser size={35} />
+          </button>
+        </div>
 
-export default Navbar
+        {isProfileOpen && (
+          <div className="absolute top-16 right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10">
+            <div className="py-1">
+              <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                Login
+              </button>
+              <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                Logout
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

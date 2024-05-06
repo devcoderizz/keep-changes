@@ -3,10 +3,10 @@ import Navbar from "../components/Navbar"
 
 const HomePage = () => {
   return (
-    <div  className="flex flex-row">
+    <div  className="flex flex-col space-x-10 bg-[#FFF1F1] ">
     <Navbar/>
-    {/* <Hero/> */}
-
+    <Hero/>
+    
     </div>
   )
 }

@@ -6,6 +6,7 @@ import Fundraisers from "./pages/Fundraisers"
 
 const AppRoutes = () => {
   return (
+    <div className="mx-5 my-2">
     <Routes>
         <Route path="/" element={  <HomePage/> } ></Route>
         <Route path="/fundraisers" element={<Fundraisers/> } ></Route>
@@ -17,6 +18,7 @@ const AppRoutes = () => {
 
 
     </Routes>
+    </div>
   )
 }
 
