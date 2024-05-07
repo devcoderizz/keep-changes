@@ -73,21 +73,22 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-white border-gray-200 w-full">
+    <nav className=" bg-white border-gray-200 w-full py-5 md:py-0 px-10 md:px-20
+    ">
 
-      <div className="flex items-center justify-between mx-auto p-4">
+      <div className="flex items-center justify-between mx-auto md:py-4">
         
 
-      <div className="flex items-center space-x-3 md:ml-8 mt-1 gap-3">
+      <div className="flex items-center space-x-3    mt-1 gap-3">
           <Link to="/" className="text-2xl font-extrabold text-red-500 text-nowrap">
             Keep Changes
           </Link>
           <button
             type="button"
-            className="flex items-center justify-center w-10 h-10 text-indigo-500 profile-button md:hidden"
+            className="flex items-center justify-center w-10 h-10 text-indigo-500 profile-button md:hidden  "
             onClick={handleProfileClick}
           >
-            <FaCircleUser size={35} />
+            <FaCircleUser size={35} x />
           </button>
         </div>
         <div className="hidden md:flex"> 
