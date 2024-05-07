@@ -1,13 +1,13 @@
 import Hero from "../components/Hero"
-import Navbar from "../components/Navbar"
+// import Navbar from "../components/Navbar"
 
 const HomePage = () => {
   return (
-    <div  className="flex flex-col space-x-10 bg-[#FFF1F1] ">
-    <Navbar/>
+    <div  className="flex flex-col space-x-10  ">
+    {/* <Navbar/> */}
     <Hero/>
     
-    </div>
+    </div> 
   )
 }
 
