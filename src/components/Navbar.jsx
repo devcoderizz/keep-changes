@@ -146,7 +146,7 @@ const Navbar = () => {
 
 
         <div ref={profileRef} className="hidden md:flex items-center space-x-3 md:space-x-0 gap-4">
-          <button className="p-2 font-semibold bg-[#EF5757] text-white rounded-lg hover:bg-[#d84f4f]">
+          <button className="p-2 border-1 border-red-600 font-semibold bg-[#EF5757] text-white rounded-lg hover:bg-[#d84f4f]">
             Start a Fundraiser
           </button>
           <button
