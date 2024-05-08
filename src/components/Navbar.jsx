@@ -51,6 +51,7 @@ const Navbar = () => {
   const [isProfileOpen, setProfileOpen] = useState(false);
   const profileRef = useRef(null);
 
+
   const handleClickOutside = (event) => {
     if (
       profileRef.current &&
@@ -83,13 +84,12 @@ const Navbar = () => {
           <Link to="/" className="text-2xl font-extrabold text-red-500 text-nowrap">
             Keep Changes
           </Link>
-          <button
-            type="button"
-            className="flex items-center justify-center w-10 h-10 text-indigo-500 profile-button md:hidden  "
-            onClick={handleProfileClick}
+          <div
+            className="flex items-center justify-center w-10 h-10 text-indigo-500 profile-button md:hidden   "
+            
           >
-            <FaCircleUser size={35} x />
-          </button>
+            <FaCircleUser size={35} onClick={handleProfileClick} />
+          </div>
         </div>
         <div className="hidden md:flex"> 
           <ul className="flex flex-col md:flex-row font-medium p-4 md:p-0 mt-4 gap-10">
@@ -161,10 +161,10 @@ const Navbar = () => {
         {isProfileOpen && (
           <div className="absolute top-16 right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10">
             <div className="py-1">
-              <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              <Link to="/auth"  onClick={console.log("hello")}  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
                 Login
-              </button>
-              <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              </Link>
+              <button  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
                 Logout
               </button>
             </div>

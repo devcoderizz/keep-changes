@@ -7,6 +7,15 @@
 html,*{
     font-family: "lato";
 }
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 .swiper-button-next {
     right: 10px !important;
     left: auto !important; /* Adjust this value as needed */
@@ -43,3 +52,4 @@ html,*{
     padding: 50px !important;
     width: 90%;
   }
+
